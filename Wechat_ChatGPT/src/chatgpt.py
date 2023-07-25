@@ -1,11 +1,11 @@
 import werobot
 robot = werobot.WeRoBot(token='mytoken')
-import openai
+import run_openai
 
-openai.api_key="mykey" # Need to be generated from OpenAI
+run_openai.api_key="mykey" # Need to be generated from OpenAI
 
 def generate_response(prompt):
-    response = openai.Completion.create(
+    response = run_openai.Completion.create(
         model="text-davinci-003",
         prompt=prompt,
         temperature=0,

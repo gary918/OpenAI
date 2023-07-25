@@ -1,14 +1,14 @@
 import os
-import openai
+import run_openai
 import werobot
 robot = werobot.WeRoBot(token='mytoken') # Your WeChat token filled in Basic Configuration in wechat backend.
-openai.api_type = "azure"
-openai.api_version = "2023-03-15-preview"
-openai.api_base = os.getenv("OPENAI_API_BASE")  # Your Azure OpenAI resource's endpoint value.
-openai.api_key = os.getenv("OPENAI_API_KEY")
+run_openai.api_type = "azure"
+run_openai.api_version = "2023-03-15-preview"
+run_openai.api_base = os.getenv("OPENAI_API_BASE")  # Your Azure OpenAI resource's endpoint value.
+run_openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def generate_response(prompt):
-    response = openai.ChatCompletion.create(
+    response = run_openai.ChatCompletion.create(
         engine="gpt-35-turbo", # The deployment name you chose when you deployed the ChatGPT or GPT-4 model.
         messages=[
             {"role": "system", "content": "Assistant is a large language model trained by OpenAI."},

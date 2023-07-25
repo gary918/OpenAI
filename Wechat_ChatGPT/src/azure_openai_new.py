@@ -1,17 +1,17 @@
 import os
-import openai
+import run_openai
 import threading
 import werobot
 from werobot.replies import TransferCustomerServiceReply
 
 robot = werobot.WeRoBot(token='mytoken') # Your WeChat token filled in Basic Configuration in wechat backend.
-openai.api_type = "azure"
-openai.api_version = "2023-03-15-preview"
-openai.api_base = os.getenv("OPENAI_API_BASE")  # Your Azure OpenAI resource's endpoint value.
-openai.api_key = os.getenv("OPENAI_API_KEY")
+run_openai.api_type = "azure"
+run_openai.api_version = "2023-03-15-preview"
+run_openai.api_base = os.getenv("OPENAI_API_BASE")  # Your Azure OpenAI resource's endpoint value.
+run_openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def generate_response(prompt):
-    response = openai.ChatCompletion.create(
+    response = run_openai.ChatCompletion.create(
         engine="gpt-35-turbo", # The deployment name you chose when you deployed the ChatGPT or GPT-4 model.
         messages=[
             {"role": "system", "content": "Assistant is a large language model trained by OpenAI."},
@@ -26,7 +26,7 @@ def post_wechat_customer_service_reply(messages):
     chatGptResponse = generate_response(messages.content)
     # https://werobot.readthedocs.io/zh_CN/latest/client.html#
     # https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service_Center_messages.html
-    # 获取 Access Token，发送消息的客服账户 等 API
+    # 获取 Access Token，发送消息的客服账户等API
     return robot.client.send_text_message(user_id=messages.source, content=chatGptResponse, kf_account=None)
 
 @robot.handler
