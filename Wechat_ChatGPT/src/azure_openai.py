@@ -1,9 +1,13 @@
 import os
 import run_openai
 import werobot
+
+from dotenv import load_dotenv, find_dotenv
+_ = load_dotenv(find_dotenv()) # read local .env file
+
 robot = werobot.WeRoBot(token='mytoken') # Your WeChat token filled in Basic Configuration in wechat backend.
 run_openai.api_type = "azure"
-run_openai.api_version = "2023-03-15-preview"
+run_openai.api_version = os.getenv("OPENAI_ENGINE")
 run_openai.api_base = os.getenv("OPENAI_API_BASE")  # Your Azure OpenAI resource's endpoint value.
 run_openai.api_key = os.getenv("OPENAI_API_KEY")
 

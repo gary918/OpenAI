@@ -1,5 +1,6 @@
 # Use ChatGPT in Your WeChat Official Account
 ## Create a WeChat Official Account
+Access [WeChat Official Accounts Platform](https://mp.weixin.qq.com/)
 ## Create a Virtual Machine
 * Choose Ubuntu 20.04
 * Enable VM to listen at 0.0.0.0:80 by running ```sudo setcap CAP_NET_BIND_SERVICE=+eip /usr/bin/python3.8```
